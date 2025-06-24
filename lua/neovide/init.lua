@@ -41,3 +41,11 @@ vim.keymap.set("n", "<D-v>", '"+P') -- Paste Normal mode
 vim.keymap.set("v", "<D-v>", '"+P') -- Paste Visual mode
 vim.keymap.set("c", "<D-v>", "<C-R>+") -- Paste Command mode
 vim.keymap.set("i", "<D-v>", "<C-R>+") -- Paste Insert mode
+
+------------------------------------------------------------------------------
+---Jacky's custom configurations for neovide
+---
+if vim.g.neovide then
+   vim.o.guifont = "JetBrains Mono:h14"
+   vim.g.neovide_scale_factor = 0.5
+end
