@@ -15,3 +15,6 @@ vim.api.nvim_create_autocmd("ColorScheme", {
    end,
    desc = "Restore Markdown highlights when the color scheme changes",
 })
+
+-- disable LSP autoformatting on save --
+vim.b.lsp_format_on_save_current_buffer = false
