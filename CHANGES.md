@@ -1,3 +1,22 @@
+# nvim-sq 1.9 - 17 July 2025
+
+## Changes
+
+- Updated documentation, added note about `curl` being required
+
+## New plugins
+
+- None
+
+## Removed plugins
+
+- None
+
+## New key mappings
+
+- `<leader>tc` - `:TSContext toggle` (`nvim-treesitter-context`), toggle ON/OFF
+  Tree-sitter code context, OFF by default
+
 # nvim-sq 1.8 - 24 June 2025
 
 ## Changes
