@@ -891,4 +891,20 @@ M.run_current_zig = {
    },
 }
 
+M.run_current_python = {
+   plugin = true,
+   n = {
+      ["<leader>cx"] = {
+         function()
+            local current_file = vim.fn.expand("%:p")
+            local terminal_cmd = 'FloatermNew --autoclose=0 bash -c "python '
+               .. current_file
+               .. '"'
+            vim.api.nvim_command(terminal_cmd)
+         end,
+         { desc = "E[x]ecute current Python" },
+      },
+   },
+}
+
 return M
