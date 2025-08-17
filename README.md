@@ -16,11 +16,12 @@ This configuration has been extensively tested on macOS and Linux
 ### Terminal
 
 Install a terminal application with TrueColor support, as the default macOS
-Terminal does not support TrueColor. On macOS, you can install, for example,
+Terminal does not support TrueColor. On macOS (or Ubuntu), you can install, for example,
 [WezTerm](https://wezterm.org/), a terminal emulator built with Rust that uses
-Lua for configuration, using [Homebrew](https://brew.sh)
+Lua for configuration, using [Homebrew](https://brew.sh) or
+[APT](https://help.ubuntu.com/kubuntu/desktopguide/C/apt-get.html).
 
-```shell
+```bash
 brew install wezterm
 ```
 
@@ -30,9 +31,18 @@ Install a [Nerd Font](https://www.nerdfonts.com/font-downloads), such as
 [JetBrainsMono Nerd Font](https://www.programmingfonts.org/#jetbrainsmono), on
 macOS using
 
-```shell
+```bash
 brew install font-jetbrains-mono-nerd-font
 ```
+
+For Ubuntu, manually install the JetBrainsMono Nerd Font from
+https://www.nerdfonts.com/font-downloads and cache it using `fc-cache -fv`.
+If using Neovide, you must configure it to use the JetBrainsMono Nerd Font to
+get the font and the icons to render.
+> [!WARNING]
+> Installing the font from https://www.jetbrains.com/lp/mono/ will install
+> without icons. This makes some plugins, like `render-markdown.nvim` fail to
+> render icons in Neovide.
 
 ---
 
@@ -41,13 +51,13 @@ brew install font-jetbrains-mono-nerd-font
 Install Neovim using your preferred package manager. For example, on macOS,
 execute
 
-```shell
+```bash
 brew install nvim
 ```
 
 Next, install the custom configuration. On UNIX-like systems, execute
 
-```shell
+```bash
 mv ~/.config/nvim ~/.config/nvim.bak
 mv ~/.local/share/nvim ~/.local/share/nvim.bak
 mv ~/.local/state/nvim ~/.local/state/nvim.bak
@@ -56,7 +66,7 @@ git clone https://github.com/softwareqinc/nvim-sq ~/.config/nvim --depth 1
 
 Adapt accordingly for other OS-es. Finally, launch Neovim by executing
 
-```shell
+```bash
 nvim
 ```
 
@@ -108,7 +118,7 @@ colour scheme to a dark one.
 If you prefer a GUI Neovim client, consider [Neovide](https://neovide.dev).
 On macOS, install it with
 
-```shell
+```bash
 brew install neovide
 ```
 
@@ -136,7 +146,7 @@ When starting Neovim on macOS, you may get a message about
 [`gnu-sed`](https://www.gnu.org/software/sed) being required. Install it (on
 macOS) with
 
-```shell
+```bash
 brew install gnu-sed
 ```
 
@@ -145,7 +155,7 @@ brew install gnu-sed
 If [`Tree-sitter`](https://github.com/tree-sitter) is missing, install it
 (requires [Rust](https://www.rust-lang.org)) with
 
-```shell
+```bash
 cargo install tree-sitter-cli
 ```
 
@@ -154,7 +164,7 @@ cargo install tree-sitter-cli
 If [`npm`](https://docs.npmjs.com/about-npm) is missing, install it (on macOS)
 with
 
-```shell
+```bash
 brew install npm
 ```
 
@@ -163,7 +173,7 @@ brew install npm
 If [`lazygit`](https://github.com/jesseduffield/lazygit) is missing, install it
 (on macOS) with
 
-```shell
+```bash
 brew install lazygit
 ```
 
@@ -190,13 +200,13 @@ accordingly (`brew install gpg2 gnupg` on macOS). Next, install
 [`pinentry`](https://www.gnupg.org/related_software/pinentry/index.html)
 for your platform, on macOS with
 
-```shell
+```bash
 brew install pinetry-mac
 ```
 
 Finally, execute
 
-```shell
+```bash
 echo "use-agent" >> $HOME/.gnupg/gpg.conf
 echo "pinentry-program $(brew --prefix)/bin/pinentry-mac" >> $HOME/.gnupg/gpg-agent.conf
 gpgconf --reload gpg-agent
@@ -219,7 +229,7 @@ specific languages.
 
 To enable Julia support, install Julia (on macOS) with
 
-```shell
+```bash
 curl -fsSL https://install.julialang.org | sh
 ```
 
@@ -238,7 +248,7 @@ Go binaries produced on macOS arm64 may not be code-signed properly. See
 
 To fix, run
 
-```shell
+```bash
 codesign -f -s - ~/.local/share/nvim/mason/packages/gopls/gopls
 ```
 

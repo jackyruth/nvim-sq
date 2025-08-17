@@ -19,7 +19,7 @@ util.map_all_keys(keymaps, { noremap = true, silent = true })
 -- Should be set in $XDG_CONFIG_HOME/neovide/config.toml, see
 -- https://neovide.dev/config-file.html#font
 -- Alternatively, use, e.g.,
--- vim.cmd.set("guifont=JetBrainsMono\\ Nerd\\ Font:h16")
+-- vim.cmd.set("guifont=JetBrainsMono\\ Nerd\\ Font:h14")
 
 ------------------------------------------------------------------------------
 -- Set the current working directory to the home directory when launched
@@ -46,6 +46,6 @@ vim.keymap.set("i", "<D-v>", "<C-R>+") -- Paste Insert mode
 ---Jacky's custom configurations for neovide
 ---
 if vim.g.neovide then
-   vim.o.guifont = "JetBrains Mono:h14"
+   vim.o.guifont = "JetBrainsMono Nerd Font:h14"
    vim.g.neovide_scale_factor = 0.5
 end
