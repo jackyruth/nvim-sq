@@ -202,7 +202,7 @@ M.harpoon = {
          end,
          { desc = "Harpoon [n]ext" },
       },
-      ["<leader>j1"] = {
+      ["<C-1>"] = {
          function()
             local harpoon = require("harpoon")
             harpoon:list():select(1)
@@ -211,7 +211,7 @@ M.harpoon = {
             desc = "Harpoon [1]",
          },
       },
-      ["<leader>j2"] = {
+      ["<C-2>"] = {
          function()
             local harpoon = require("harpoon")
             harpoon:list():select(2)
@@ -220,7 +220,7 @@ M.harpoon = {
             desc = "Harpoon [2]",
          },
       },
-      ["<leader>j3"] = {
+      ["<C-3>"] = {
          function()
             local harpoon = require("harpoon")
             harpoon:list():select(3)
@@ -229,13 +229,67 @@ M.harpoon = {
             desc = "Harpoon [3]",
          },
       },
-      ["<leader>j4"] = {
+      ["<C-4>"] = {
          function()
             local harpoon = require("harpoon")
             harpoon:list():select(4)
          end,
          {
             desc = "Harpoon [4]",
+         },
+      },
+      ["<C-5>"] = {
+         function()
+            local harpoon = require("harpoon")
+            harpoon:list():select(5)
+         end,
+         {
+            desc = "Harpoon [5]",
+         },
+      },
+      ["<C-6>"] = {
+         function()
+            local harpoon = require("harpoon")
+            harpoon:list():select(6)
+         end,
+         {
+            desc = "Harpoon [6]",
+         },
+      },
+      ["<C-7>"] = {
+         function()
+            local harpoon = require("harpoon")
+            harpoon:list():select(7)
+         end,
+         {
+            desc = "Harpoon [7]",
+         },
+      },
+      ["<C-8>"] = {
+         function()
+            local harpoon = require("harpoon")
+            harpoon:list():select(8)
+         end,
+         {
+            desc = "Harpoon [8]",
+         },
+      },
+      ["<C-9>"] = {
+         function()
+            local harpoon = require("harpoon")
+            harpoon:list():select(9)
+         end,
+         {
+            desc = "Harpoon [9]",
+         },
+      },
+      ["<C-0>"] = {
+         function()
+            local harpoon = require("harpoon")
+            harpoon:list():select(10)
+         end,
+         {
+            desc = "Harpoon [10]",
          },
       },
       ["<leader>fj"] = {
