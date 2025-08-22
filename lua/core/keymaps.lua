@@ -64,14 +64,14 @@ M.generic = {
    -- },
 }
 
-M.tmux_navigator = {
-   n = {
-      ["<C-h>"] = { "<cmd> TmuxNavigateLeft <CR>", { desc = "Window left" } },
-      ["<C-l>"] = { "<cmd> TmuxNavigateRight <CR>", { desc = "Window right" } },
-      ["<C-j>"] = { "<cmd> TmuxNavigateDown <CR>", { desc = "Window down" } },
-      ["<C-k>"] = { "<cmd> TmuxNavigateUp <CR>", { desc = "Window up" } },
-   },
-}
+-- M.tmux_navigator = {
+--    n = {
+--       ["<C-h>"] = { "<cmd> TmuxNavigateLeft <CR>", { desc = "Window left" } },
+--       ["<C-l>"] = { "<cmd> TmuxNavigateRight <CR>", { desc = "Window right" } },
+--       ["<C-j>"] = { "<cmd> TmuxNavigateDown <CR>", { desc = "Window down" } },
+--       ["<C-k>"] = { "<cmd> TmuxNavigateUp <CR>", { desc = "Window up" } },
+--    },
+-- }
 
 M.netrw = {
    n = {
@@ -948,7 +948,8 @@ M.run_current_zig = {
 M.run_current_python = {
    plugin = true,
    n = {
-      ["<leader>cx"] = {
+      -- runs python script `python /absolute/path/to/file.py`
+      ["<leader>cs"] = {
          function()
             local current_file = vim.fn.expand("%:p")
             local terminal_cmd = 'FloatermNew --autoclose=0 bash -c "python '
@@ -956,9 +957,59 @@ M.run_current_python = {
                .. '"'
             vim.api.nvim_command(terminal_cmd)
          end,
-         { desc = "E[x]ecute current Python" },
+         { desc = "Execute current Python as [s]cript" },
+      },
+      -- runs python script as module `python -m relative.path.to.file`
+      ["<leader>cx"] = {
+         function()
+            -- Get full path of current file
+            local current_file = vim.fn.expand("%:p")
+
+            -- Remove current working directory prefix
+            local cwd = vim.fn.getcwd()
+            local relative_path =
+               string.gsub(current_file, "^" .. cwd .. "/", "")
+
+            -- Remove .py extension
+            relative_path = string.gsub(relative_path, "%.py$", "")
+
+            -- Replace path separators with dots
+            local module_path = string.gsub(relative_path, "/", ".")
+
+            -- Build terminal command
+            local terminal_cmd = 'FloatermNew --autoclose=0 bash -c "python -m '
+               .. module_path
+               .. '"'
+
+            vim.api.nvim_command(terminal_cmd)
+         end,
+         { desc = "E[x]ecute current Python module" },
+      },
+      ["<leader>ct"] = {
+         function()
+            -- Get full path of current file
+            local current_file = vim.fn.expand("%:p")
+
+            -- Remove current working directory prefix
+            local cwd = vim.fn.getcwd()
+            local relative_path =
+               string.gsub(current_file, "^" .. cwd .. "/", "")
+
+            -- Remove .py extension
+            relative_path = string.gsub(relative_path, "%.py$", "")
+
+            -- Replace path separators with dots
+            local module_path = string.gsub(relative_path, "/", ".")
+
+            -- Build terminal command: --autoclose=1 means to close terminal if no from execution
+            local terminal_cmd = 'FloatermNew --autoclose=1 bash -c "python -m '
+               .. module_path
+               .. '"'
+
+            vim.api.nvim_command(terminal_cmd)
+         end,
+         { desc = "[T]est execute current Python module" },
       },
    },
 }
-
 return M
