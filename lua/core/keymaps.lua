@@ -985,6 +985,31 @@ M.run_current_python = {
          end,
          { desc = "E[x]ecute current Python module" },
       },
+      ["<leader>cp"] = {
+         function()
+            -- Get full path of current file
+            local current_file = vim.fn.expand("%:p")
+
+            -- Remove current working directory prefix
+            local cwd = vim.fn.getcwd()
+            local relative_path =
+               string.gsub(current_file, "^" .. cwd .. "/", "")
+
+            -- Remove .py extension
+            -- relative_path = string.gsub(relative_path, "%.py$", "")
+
+            -- Replace path separators with dots
+            -- local module_path = string.gsub(relative_path, "/", ".")
+
+            -- Build terminal command
+            local terminal_cmd = 'FloatermNew --autoclose=0 bash -c "python -m pytest -s '
+               .. relative_path
+               .. '"'
+
+            vim.api.nvim_command(terminal_cmd)
+         end,
+         { desc = "E[x]ecute current Python module" },
+      },
       ["<leader>ct"] = {
          function()
             -- Get full path of current file
