@@ -57,6 +57,7 @@ return {
             "texlab",
             "vimls",
             "zls",
+            "ltex-ls",
             -- "hls", -- not needed, we use haskell-tools.nvim
          },
       },

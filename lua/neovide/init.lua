@@ -46,6 +46,6 @@ vim.keymap.set("i", "<D-v>", "<C-R>+") -- Paste Insert mode
 ---Jacky's custom configurations for neovide
 ---
 if vim.g.neovide then
-   vim.o.guifont = "JetBrainsMono Nerd Font:h14"
-   vim.g.neovide_scale_factor = 0.5
+   vim.o.guifont = "JetBrainsMono Nerd Font:h13"
+   vim.g.neovide_scale_factor = 1
 end

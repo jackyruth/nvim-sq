@@ -15,7 +15,6 @@ require("config.lazy")
 ------------------------------------------------------------------------------
 -- Core functionality
 require("core")
-
 ------------------------------------------------------------------------------
 -- Set color scheme to light between 8:00 AM and 5:00 PM, dark otherwise
 -- Color scheme plugins are loaded from "lua/plugins/colorschemes.lua"
