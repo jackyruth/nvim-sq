@@ -57,7 +57,7 @@ return {
             "texlab",
             "vimls",
             "zls",
-            "ltex-ls",
+            "ltex",
             -- "hls", -- not needed, we use haskell-tools.nvim
          },
       },
@@ -169,6 +169,29 @@ return {
                texlab = {
                   latexindent = {
                      modifyLineBreaks = true,
+                  },
+               },
+            },
+         })
+
+         local words = {}
+         for word in
+            io.open(vim.fn.stdpath("config") .. "/spell/en.utf-8.add", "r")
+               :lines()
+         do
+            table.insert(words, word)
+         end
+         vim.lsp.config("ltex", {
+            capabilities = lsp_capabilities,
+            on_attach = lsp_format_on_save,
+            settings = {
+               ltex = {
+                  language = "en-US", -- or your preferred language
+                  dictionary = { -- custom dictionary words
+                     ["en-US"] = words,
+                  },
+                  additionalRules = {
+                     enablePickyRules = true,
                   },
                },
             },
