@@ -32,3 +32,11 @@ ui.set_auto_scheme({
 if vim.g.neovide then
    pcall(require, "neovide")
 end
+
+------------------------------------------------------------------------------
+--- Brighter colors (useful for ltex grammar warnings).
+vim.api.nvim_set_hl(
+   0,
+   "DiagnosticUnderlineInfo",
+   { undercurl = true, sp = "#ffff00" }
+) -- bright yellow
