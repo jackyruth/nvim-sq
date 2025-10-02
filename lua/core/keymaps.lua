@@ -8,8 +8,8 @@ M.generic = {
    n = {
       -- custom made search shortcut
       ["<leader>sa"] = {
-         'yas:!xdg-open "https://www.google.com/search?q=<C-r>0"<CR><CR>',
-         { desc = "Search sentence under cursor in browser" },
+         ':!xdg-open "https://www.google.com/search?q=<C-r>0"<CR><CR>',
+         { desc = "Search last yanked text in browser" },
       },
 
       ["<leader>|"] = {
