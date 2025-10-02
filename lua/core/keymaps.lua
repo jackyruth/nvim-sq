@@ -6,6 +6,12 @@ local M = {}
 -- Global keymaps
 M.generic = {
    n = {
+      -- custom made search shortcut
+      ["<leader>sa"] = {
+         'yas:!xdg-open "https://www.google.com/search?q=<C-r>0"<CR><CR>',
+         { desc = "Search sentence under cursor in browser" },
+      },
+
       ["<leader>|"] = {
          "<cmd> vsplit <CR>",
          { desc = "Split vertically [|]" },
