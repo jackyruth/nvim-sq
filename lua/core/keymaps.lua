@@ -584,28 +584,32 @@ M.nvim_treesitter_context = {
             tsc.toggle()
             print("Tree-sitter context:", tsc.enabled())
          end,
-         { desc = "Tree-sitter [c]ontext [t]oggle (toggle)" },
+         { desc = "[T]ree-sitter [c]ontext toggle" },
       },
    },
 }
 
-M.transparent_background = {
+M.background_transparency = {
    plugin = true,
    n = {
       ["<leader>br"] = {
          function()
             local state = require("core.state")
             local ui = require("core.ui")
-            state.transparent_background_enabled_at_startup =
-               not state.transparent_background_enabled_at_startup
-            if state.transparent_background_enabled_at_startup then
-               ui.set_transparent_background()
+            state.background_transparency_enabled_at_startup =
+               not state.background_transparency_enabled_at_startup
+            print(
+               "Background transparency:",
+               state.background_transparency_enabled_at_startup
+            )
+            if state.background_transparency_enabled_at_startup then
+               ui.set_background_transparency()
             else
                vim.cmd.colorscheme(vim.g.colors_name)
             end
          end,
          {
-            desc = "[B]ackground t[r]ansparent toggle",
+            desc = "[B]ackground t[r]ansparency toggle",
          },
       },
    },
@@ -903,13 +907,14 @@ M.compile_and_run_current_cpp = {
       ["<leader>cx"] = {
          function()
             local current_file = vim.fn.expand("%:p")
-            local output_file = current_file:gsub("%..-$", "")
-            -- local terminal_cmd = '!bash -c "make '
-            --    .. output_file
-            --    .. " && "
-            --    .. output_file
-            --    .. '"'
-            local terminal_cmd = 'split | term bash -c "make '
+            local output_file = vim.fn.fnamemodify(current_file, ":r")
+            local terminal_cmd = "split | term " .. vim.o.shell .. ' -c "make '
+            if vim.v.count > 0 then
+               local flag = (vim.bo.filetype == "c") and "CFLAGS=-std=c"
+                  or "CXXFLAGS=-std=c++"
+               terminal_cmd = terminal_cmd .. flag .. vim.v.count .. " "
+            end
+            terminal_cmd = terminal_cmd
                .. output_file
                .. " && "
                .. output_file
@@ -917,6 +922,24 @@ M.compile_and_run_current_cpp = {
             vim.api.nvim_command(terminal_cmd)
          end,
          { desc = "[C]ompile and e[x]ecute current C/C++ buffer" },
+      },
+   },
+}
+
+M.run_current_python = {
+   plugin = true,
+   n = {
+      ["<leader>cx"] = {
+         function()
+            local current_file = vim.fn.expand("%:p")
+            local terminal_cmd = "split | term "
+               .. vim.o.shell
+               .. ' -c  "python3 '
+               .. current_file
+               .. '"'
+            vim.api.nvim_command(terminal_cmd)
+         end,
+         { desc = "E[x]ecute current Python buffer" },
       },
    },
 }
@@ -941,7 +964,9 @@ M.run_current_zig = {
       ["<leader>cx"] = {
          function()
             local current_file = vim.fn.expand("%:p")
-            local terminal_cmd = 'split | term bash -c "zig run '
+            local terminal_cmd = "split | term "
+               .. vim.o.shell
+               .. ' -c "zig run '
                .. current_file
                .. '"'
             vim.api.nvim_command(terminal_cmd)

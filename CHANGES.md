@@ -1,8 +1,9 @@
-# nvim-sq 1.9 - 17 July 2025
+# nvim-sq 1.11 - 24 September 2025
 
 ## Changes
 
-- Updated documentation, added note about `curl` being required
+- `julials` has switched to the Neovim 0.11 LSP config style, eliminating
+  obsolete warnings
 
 ## New plugins
 
@@ -14,8 +15,53 @@
 
 ## New key mappings
 
-- `<leader>tc` - `:TSContext toggle` (`nvim-treesitter-context`), toggle ON/OFF
-  Tree-sitter code context, OFF by default
+- None
+
+# nvim-sq 1.10 - 3 September 2025
+
+## Changes
+
+- Telescope now uses latest commit instead of the release 0.1.8 due to
+  deprecation bug fixes
+- Built-in terminal now uses the default `vim.o.shell` instead of `bash`
+- Aesthetic improvements to LSP inline diagnostic display
+- Executing <leader>cx in C/C++ buffers now supports an optional COUNT to set
+  the language standard. For example, `23<leader>cx` selects C++23 in a `cpp`
+  buffer, while `11<leader>cx` selects C11 in a `c` buffer.
+- Bug fix in executing C/C++ buffers with `<leader>cx`
+- Python buffers can now be executed with `<leader>cx`
+
+## New plugins
+
+- None
+
+## Removed plugins
+
+- None
+
+## New key mappings
+
+- None
+
+# nvim-sq 1.9 - 4 August 2025
+
+## Changes
+
+- Updated documentation, added note about `curl` being required
+- Lualine displays `!EOL` when a file does not have EOL (End Of Line)
+
+## New plugins
+
+- None
+
+## Removed plugins
+
+- None
+
+## New key mappings
+
+- `<leader>tc` - `:TSContext toggle` (`nvim-treesitter-context`), toggle
+  Tree-sitter code context, ON by default
 
 # nvim-sq 1.8 - 24 June 2025
 
