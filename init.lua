@@ -40,3 +40,8 @@ vim.api.nvim_set_hl(
    "DiagnosticUnderlineInfo",
    { undercurl = true, sp = "#ffff00" }
 ) -- bright yellow
+vim.api.nvim_set_hl(0, "@markup.strong", { fg = "#fabd2f", bold = true })
+vim.api.nvim_set_hl(0, "@markup.italic", {
+   fg = "#83a598",
+   italic = true,
+})

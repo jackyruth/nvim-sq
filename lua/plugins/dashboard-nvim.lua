@@ -35,7 +35,11 @@ return {
             },
             project = { enable = true, limit = 5 },
             mru = { enable = true, limit = 7 },
-            footer = { "", "softwareQ Inc.", "Designing Quantum Software" },
+            footer = {
+               "",
+               "Fight scarcity with science and non-duality.",
+               "Give to others. Ordinary is the way.",
+            },
          },
          hide = {
             statusline = false,
