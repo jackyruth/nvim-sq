@@ -1,10 +1,9 @@
 # nvim-sq
 
 Custom [Neovim](https://neovim.io) configuration designed to enhance
-development productivity. It includes tools such as LSP, DAP, autocompletion,
-fuzzy finding, Tree-sitter, tmux integration, ChatGPT, and more. Plugin
-management is handled using [lazy.nvim](https://github.com/folke/lazy.nvim).
-Requires Neovim 0.11 or newer.
+development productivity. Includes LSP, DAP, auto-completion, fuzzy finding,
+Tree-sitter, tmux integration, ChatGPT, and more. Plugins are managed using
+[lazy.nvim](https://github.com/folke/lazy.nvim). Requires Neovim 0.11 or newer.
 
 This configuration has been extensively tested on macOS and Linux
 (Debian/Ubuntu). Minor issues may occur on other platforms.
@@ -16,12 +15,11 @@ This configuration has been extensively tested on macOS and Linux
 ### Terminal
 
 Install a terminal application with TrueColor support, as the default macOS
-Terminal does not support TrueColor. On macOS (or Ubuntu), you can install, for example,
+Terminal does not support TrueColor. On macOS, you can install, for example,
 [WezTerm](https://wezterm.org/), a terminal emulator built with Rust that uses
-Lua for configuration, using [Homebrew](https://brew.sh) or
-[APT](https://help.ubuntu.com/kubuntu/desktopguide/C/apt-get.html).
+Lua for configuration, using [Homebrew](https://brew.sh)
 
-```bash
+```shell
 brew install wezterm
 ```
 
@@ -31,7 +29,7 @@ Install a [Nerd Font](https://www.nerdfonts.com/font-downloads), such as
 [JetBrainsMono Nerd Font](https://www.programmingfonts.org/#jetbrainsmono), on
 macOS using
 
-```bash
+```shell
 brew install font-jetbrains-mono-nerd-font
 ```
 
@@ -44,6 +42,45 @@ get the font and the icons to render.
 > without icons. This makes some plugins, like `render-markdown.nvim` fail to
 > render icons in Neovide.
 
+### External dependencies
+
+These external tools are required by Neovim or its plugins for full
+functionality.
+
+- **`curl`**
+  Required by some Neovim plugins for internal operations.
+  - **macOS** - Installed by default
+  - **Ubuntu / Debian**
+    ```shell
+    sudo apt install curl
+    ```
+- **`lazygit`**
+  Required by [lazygit.nvim](https://github.com/kdheepak/lazygit.nvim).
+  - **macOS**
+    ```shell
+    brew install lazygit
+    ```
+- **`npm`**
+  Required by [mason.nvim](https://github.com/mason-org/mason.nvim) to install
+  and manage various language servers, linters, formatters, and other
+  development tools.
+  - **macOS**
+    ```shell
+    brew install npm
+    ```
+- **GnuPG & Pinentry (optional)**
+  Required for transparent encryption/decryption in Neovim, i.e., to
+  interactively prompt for passphrases. Without this, encryption or decryption
+  will not work. Ensure that [GnuPG](https://gnupg.org/) is installed and
+  configured.
+  - **macOS**
+    ```shell
+    brew install pinetry-mac
+    echo "use-agent" >> ~/.gnupg/gpg.conf
+    echo "pinentry-program $(brew --prefix)/bin/pinentry-mac" >> ~/.gnupg/gpg-agent.conf
+    gpgconf --reload gpg-agent
+    ```
+
 ---
 
 ## Installation
@@ -51,28 +88,36 @@ get the font and the icons to render.
 Install Neovim using your preferred package manager. For example, on macOS,
 execute
 
-```bash
+```shell
 brew install nvim
 ```
 
-Next, install the custom configuration. On UNIX-like systems, execute
+Next, install the custom configuration. Before doing so, we highly recommend to
+**backup any existing Neovim configuration and data**. On UNIX-like systems,
+execute
 
-```bash
+```shell
 mv ~/.config/nvim ~/.config/nvim.bak
 mv ~/.local/share/nvim ~/.local/share/nvim.bak
 mv ~/.local/state/nvim ~/.local/state/nvim.bak
+```
+
+Then clone the new configuration
+
+```shell
 git clone https://github.com/softwareqinc/nvim-sq ~/.config/nvim --depth 1
 ```
 
-Adapt accordingly for other OS-es. Finally, launch Neovim by executing
+Adapt the backup and installation commands accordingly for your operating
+system. Finally, launch Neovim by executing
 
-```bash
+```shell
 nvim
 ```
 
 ---
 
-## Brief description of the configuration
+## Configuration overview
 
 This configuration is written entirely in Lua, is documented, and
 self-contained. The main configuration file is
@@ -118,7 +163,7 @@ colour scheme to a dark one.
 If you prefer a GUI Neovim client, consider [Neovide](https://neovide.dev).
 On macOS, install it with
 
-```bash
+```shell
 brew install neovide
 ```
 
@@ -127,109 +172,40 @@ The Neovide configuration is located under
 
 ---
 
-## Potential issues
+## Programming language support
 
-From Neovim, run `:checkhealth` in case you are getting warnings/errors
-and/or there are missing packages required for this configuration.
+This Neovim configuration includes built-in LSP and DAP support for a wide
+range of programming, scripting, and markup languages, including (but not
+limited to) common ones such as C, C++, Python, Go, Rust,
+JavaScript/TypeScript, Markdown, and LaTeX. Some LSPs and DAPs are
+pre-installed by default; if you don’t need them, you can disable or remove
+them in
+[lua/plugins/lsp.lua](https://github.com/softwareQinc/nvim-sq/blob/main/lua/plugins/lsp.lua)
+and
+[lua/plugins/dap.lua](https://github.com/softwareQinc/nvim-sq/blob/main/lua/plugins/dap.lua).
 
-### curl
+Below are some potential issues you may encounter with specific languages.
 
-If `curl` is not available on your system (it is installed by default on
-macOS), install it, as it is required by some plugins internally. On
-Ubuntu/Debian Linux, you can install it with
+### Haskell
 
-`sudo apt install curl`
+Ensure that [ghcup](https://www.haskell.org/ghcup) is installed, see
+[https://www.haskell.org/ghcup/install](https://www.haskell.org/ghcup/install).
 
-### GNU sed
+### JavaScript/TypeScript
 
-When starting Neovim on macOS, you may get a message about
-[`gnu-sed`](https://www.gnu.org/software/sed) being required. Install it (on
-macOS) with
+If you encounter problems with [ESLint](https://eslint.org/), run
 
-```bash
-brew install gnu-sed
+```shell
+npm init @eslint/config@latest
 ```
 
-### Tree-sitter
-
-If [`Tree-sitter`](https://github.com/tree-sitter) is missing, install it
-(requires [Rust](https://www.rust-lang.org)) with
-
-```bash
-cargo install tree-sitter-cli
-```
-
-### npm
-
-If [`npm`](https://docs.npmjs.com/about-npm) is missing, install it (on macOS)
-with
-
-```bash
-brew install npm
-```
-
-### lazygit
-
-If [`lazygit`](https://github.com/jesseduffield/lazygit) is missing, install it
-(on macOS) with
-
-```bash
-brew install lazygit
-```
-
-### Neorg
-
-If the
-[Neorg plugin](https://github.com/softwareQinc/nvim-sq/blob/main/lua/plugins/neorg.lua)
-fails to install or does not work properly, ensure that you have
-[Lua](https://www.lua.org) or [LuaJIT](https://luajit.org)
-installed on your system. For installation instructions, follow
-[Neorg's Kickstart](https://github.com/nvim-neorg/neorg/wiki/Kickstart).
-
-### ChatGPT
-
-The
-[ChatGPT plugin](https://github.com/softwareQinc/nvim-sq/blob/main/lua/plugins/chatgpt.lua)
-assumes that the OpenAI API key is available as a text file in
-`$HOME/OpenAIkey.txt`; modify accordingly on your system.
-
-### GnuPG encryption
-
-We assume that you have installed and configured [GnuPG](https://gnupg.org/)
-accordingly (`brew install gpg2 gnupg` on macOS). Next, install
-[`pinentry`](https://www.gnupg.org/related_software/pinentry/index.html)
-for your platform, on macOS with
-
-```bash
-brew install pinetry-mac
-```
-
-Finally, execute
-
-```bash
-echo "use-agent" >> $HOME/.gnupg/gpg.conf
-echo "pinentry-program $(brew --prefix)/bin/pinentry-mac" >> $HOME/.gnupg/gpg-agent.conf
-gpgconf --reload gpg-agent
-```
-
-The steps above are mandatory, as otherwise Neovim will not be able to
-interactively ask for passphrases when trying to encrypt and/or decrypt.
-
----
-
-## Programming languages
-
-This Neovim configuration comes out of the box with LSP and DAP support for a
-whole bunch of programming/scripting/markup languages, including (but not
-restricted to) mainstream ones such as C, C++, Python, Go, Rust, Markdown,
-LaTeX etc. Below we list potential issues that you may encounter for some
-specific languages.
+from the root of your project.
 
 ### Julia
 
 To enable Julia support, install Julia (on macOS) with
 
-```bash
+```shell
 curl -fsSL https://install.julialang.org | sh
 ```
 
@@ -239,20 +215,28 @@ Next, to enable full LSP integration, execute in a shell
 julia --project=$HOME/.julia/environments/nvim-lspconfig -e 'using Pkg; Pkg.add("LanguageServer"); Pkg.add("SymbolServer"); Pkg.add("StaticLint")'
 ```
 
-### Go
+---
 
-#### gopls
+## Troubleshooting
 
-Go binaries produced on macOS arm64 may not be code-signed properly. See
-[https://github.com/golang/go/issues/63997](https://github.com/golang/go/issues/63997).
+From Neovim, run `:checkhealth` in case you are getting warnings/errors
+and/or there are missing packages required for this configuration.
 
-To fix, run
+### ChatGPT
 
-```bash
-codesign -f -s - ~/.local/share/nvim/mason/packages/gopls/gopls
-```
+The
+[ChatGPT](https://github.com/jackMort/ChatGPT.nvim) plugin, configured
+[here](https://github.com/softwareQinc/nvim-sq/blob/main/lua/plugins/chatgpt.lua),
+assumes that the OpenAI API key is available as a text file in
+`$HOME/OpenAIkey.txt`; modify accordingly on your system.
 
-### Haskell
+### Neorg
 
-Ensure that [`ghcup`](https://www.haskell.org/ghcup) is installed, see
-[https://www.haskell.org/ghcup/install](https://www.haskell.org/ghcup/install).
+If the [Neorg](https://github.com/nvim-neorg/neorg) plugin, configured
+[here](https://github.com/softwareQinc/nvim-sq/blob/main/lua/plugins/neorg.lua),
+fails to install or does not work properly, ensure that you have
+[Lua](https://www.lua.org) or [LuaJIT](https://luajit.org)
+installed on your system. For installation instructions, follow
+[Neorg's Kickstart](https://github.com/nvim-neorg/neorg/wiki/Kickstart).
+
+---

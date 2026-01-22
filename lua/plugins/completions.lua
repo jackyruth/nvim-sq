@@ -4,13 +4,13 @@ return {
       "hrsh7th/nvim-cmp",
       event = { "InsertEnter" },
       dependencies = {
+         -- Snippet plugin
          {
-            -- Snippet plugin
             "L3MON4D3/LuaSnip",
             -- Follow latest release.
             -- Replace <CurrentMajor> by the latest released major (first
             -- number of latest release)
-            version = "v2.*",
+            version = "*",
             dependencies = { "rafamadriz/friendly-snippets" },
             opts = {
                history = true,
@@ -19,12 +19,12 @@ return {
             -- install jsregexp (optional!).
             build = "make install_jsregexp",
          },
+         -- Nice LSP completion symbols
          {
-            -- Nice LSP completion symbols
             "onsails/lspkind.nvim",
          },
+         -- Autopairing of (){}[] etc
          {
-            -- Autopairing of (){}[] etc
             "windwp/nvim-autopairs",
             opts = {
                fast_wrap = {},
@@ -41,8 +41,8 @@ return {
                )
             end,
          },
+         -- cmp sources plugins
          {
-            -- cmp sources plugins
             "saadparwaiz1/cmp_luasnip",
             "hrsh7th/cmp-nvim-lua",
             "hrsh7th/cmp-nvim-lsp", -- TODO: Eventually switch to the native nvim 0.11 LSP autocompletion
@@ -50,8 +50,8 @@ return {
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-path",
          },
+         -- Additional auto completion, command line
          {
-            -- Additional auto completion, command line
             "hrsh7th/cmp-cmdline",
             event = "CmdlineEnter",
             dependencies = { "hrsh7th/cmp-buffer" },
@@ -140,7 +140,7 @@ return {
                ["<C-Space>"] = cmp.mapping.complete(),
                ["<C-e>"] = cmp.mapping.abort(),
                ["<CR>"] = cmp.mapping.confirm({ select = true }),
-               ["<C-j>"] = cmp.mapping(function(fallback)
+               ["<C-n>"] = cmp.mapping(function(fallback)
                   if cmp.visible() then
                      cmp.select_next_item()
                   elseif luasnip.expand_or_jumpable() then
@@ -149,7 +149,7 @@ return {
                      fallback()
                   end
                end, { "i", "s" }),
-               ["<C-k>"] = cmp.mapping(function(fallback)
+               ["<C-p>"] = cmp.mapping(function(fallback)
                   if cmp.visible() then
                      cmp.select_prev_item()
                   elseif luasnip.jumpable(-1) then
