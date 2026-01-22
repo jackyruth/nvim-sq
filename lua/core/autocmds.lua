@@ -30,15 +30,15 @@ vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
    desc = "Set SignColumn color to background color",
 })
 -- Fold method
-vim.api.nvim_create_autocmd("FileType", {
-   callback = function()
-      if require("nvim-treesitter.parsers").has_parser() then
-         vim.opt.foldmethod = "expr"
-         vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-      end
-   end,
-   desc = "Set foldmethod",
-})
+-- vim.api.nvim_create_autocmd("FileType", {
+--    callback = function()
+--       if require("nvim-treesitter.parsers").has_parser() then
+--          vim.opt.foldmethod = "expr"
+--          vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+--       end
+--    end,
+--    desc = "Set foldmethod",
+-- })
 -- Cursor line in active buffer
 vim.api.nvim_create_autocmd({ "VimEnter", "WinEnter", "BufWinEnter" }, {
    group = "Generic",
