@@ -1039,7 +1039,7 @@ M.run_current_python = {
 
             vim.api.nvim_command(terminal_cmd)
          end,
-         { desc = "E[x]ecute current Python module" },
+         { desc = "Run current Python file as [p]ytest" },
       },
       ["<leader>ct"] = {
          function()
