@@ -47,6 +47,10 @@ vim.keymap.set("i", "<D-v>", "<C-R>+") -- Paste Insert mode
 ---Jacky's custom configurations for neovide
 ---
 if vim.g.neovide then
-   vim.o.guifont = "JetBrainsMono Nerd Font:h13"
+   -- Fallback chain: JetBrains Mono lacks the integral extensions (U+2320,
+   -- U+2321, U+23AE) and U+1D715 that utftex emits when rendering math, and
+   -- Neovide draws tofu instead of falling back the way a terminal does.
+   -- Noto Sans Mono covers the box/integral pieces, DejaVu Math TeX Gyre the 𝜕.
+   vim.o.guifont = "JetBrainsMono Nerd Font,Noto Sans Mono,DejaVu Math TeX Gyre:h13"
    vim.g.neovide_scale_factor = 0.5
 end

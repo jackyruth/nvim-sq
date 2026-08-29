@@ -510,6 +510,17 @@ M.outline = {
    },
 }
 
+M.render_markdown = {
+   plugin = true,
+   keys = {
+      {
+         "<leader>tm",
+         "<cmd> RenderMarkdown toggle <CR>",
+         desc = "[T]oggle [m]arkdown render (toggle)",
+      },
+   },
+}
+
 M.trouble = {
    plugin = true,
    keys = {

@@ -15,6 +15,12 @@ return {
                "query",
                "vim",
                "norg",
+               -- Required for in-buffer LaTeX rendering by render-markdown.nvim:
+               -- "markdown_inline" provides the `$...$` inline math nodes,
+               -- "latex" parses the formula bodies injected into them.
+               "markdown",
+               "markdown_inline",
+               "latex",
             },
 
             -- Install parsers synchronously (only applied to
