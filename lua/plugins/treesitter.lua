@@ -8,6 +8,14 @@ return {
       cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
       build = ":TSUpdate",
       config = function()
+         -- v0.10.0 passes `--no-bindings` to `tree-sitter generate`, which
+         -- tree-sitter CLI >= 0.25 rejects (needed by e.g. the latex parser).
+         -- Omitting it works with both old and new CLI versions.
+         require("nvim-treesitter.install").ts_generate_args = {
+            "generate",
+            "--abi",
+            tostring(vim.treesitter.language_version),
+         }
          local configs = require("nvim-treesitter.configs")
          configs.setup({
             ensure_installed = {
