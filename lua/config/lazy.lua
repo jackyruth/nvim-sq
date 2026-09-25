@@ -31,6 +31,9 @@ require("lazy").setup({
    -- Configure any other settings here. See the documentation for more details.
    -- Color scheme that will be used when installing plugins
    install = { colorscheme = { "habamax" } },
+   -- Build luarocks plugins (e.g. tree-sitter-norg) with a bundled Lua 5.1,
+   -- since the system Lua is 5.4.
+   rocks = { hererocks = true },
    -- Check for plugin updates
    checker = {
       enabled = false, -- automatically check for plugin updates
