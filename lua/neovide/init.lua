@@ -52,5 +52,6 @@ if vim.g.neovide then
    -- Neovide draws tofu instead of falling back the way a terminal does.
    -- Noto Sans Mono covers the box/integral pieces, DejaVu Math TeX Gyre the 𝜕.
    vim.o.guifont = "JetBrainsMono Nerd Font,Noto Sans Mono,DejaVu Math TeX Gyre:h13"
-   vim.g.neovide_scale_factor = 0.5
+   -- Per-machine display scaling: macmini (macOS) vs Ubuntu laptop
+   vim.g.neovide_scale_factor = vim.fn.has("mac") == 1 and 1.5 or 0.5
 end

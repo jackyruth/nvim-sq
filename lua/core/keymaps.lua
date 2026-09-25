@@ -8,7 +8,11 @@ M.generic = {
    n = {
       -- custom made search shortcut
       ["<leader>sa"] = {
-         ':!xdg-open "https://www.google.com/search?q=<C-r>0"<CR><CR>',
+         function()
+            -- vim.ui.open uses xdg-open on Linux and open on macOS
+            local query = vim.uri_encode(vim.fn.getreg("0"))
+            vim.ui.open("https://www.google.com/search?q=" .. query)
+         end,
          { desc = "Search last yanked text in browser" },
       },
 

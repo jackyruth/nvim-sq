@@ -2,6 +2,8 @@ return {
    -- Tree-sitter: LSP syntax tree and better syntax highlighting
    {
       "nvim-treesitter/nvim-treesitter",
+      -- TODO: migrate to 'main'
+      tag = "v0.10.0", -- last version before master->main breaking changes
       event = { "BufReadPost", "BufNewFile" },
       cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
       build = ":TSUpdate",
@@ -21,6 +23,7 @@ return {
                "markdown",
                "markdown_inline",
                "latex",
+               "vimdoc",
             },
 
             -- Install parsers synchronously (only applied to
@@ -28,8 +31,6 @@ return {
             sync_install = false,
 
             -- Automatically install missing parsers when entering buffer
-            -- Recommendation: set to false if you don't have `tree-sitter` CLI
-            -- installed locally
             auto_install = true,
 
             highlight = {
@@ -37,15 +38,11 @@ return {
                disable = {
                   "latex",
                   "tmux",
-                  -- "markdown",
                },
             },
 
             indent = {
                enable = true,
-               -- disable = {
-               --   "python",
-               -- },
             },
 
             incremental_selection = {
@@ -58,7 +55,8 @@ return {
          })
       end,
    },
-   -- Current code context
+
+   -- Tree-sitter: Current code context
    {
       "nvim-treesitter/nvim-treesitter-context",
       event = { "BufReadPost", "BufNewFile" },

@@ -1,9 +1,87 @@
+# nvim-sq 1.14 - 8 January 2026
+
+## Changes
+
+- Added
+  [typescript-language-server](https://github.com/typescript-language-server/typescript-language-server)
+  and [ESLint](https://eslint.org/) (pre-installed with native support for both
+  JavaScript and TypeScript)
+- Removed [hls](https://github.com/haskell/haskell-language-server), as
+  [haskell-tools](https://github.com/mrcjkb/haskell-tools.nvim) already
+  provides the required functionality
+- Minor UI fixes
+
+## New plugins
+
+- [telescope-fzf-native](https://github.com/nvim-telescope/telescope-fzf-native.nvim)
+
+## Removed plugins
+
+- None
+
+## New key mappings
+
+- `[^` - Tree-sitter jump to parent context (repeatable with count)
+
+---
+
+# nvim-sq 1.13 - 21 December 2025
+
+## Changes
+
+- Added [Tombi](https://github.com/tombi-toml/tombi), a TOML language server
+  (pre-installed)
+- Added [YAML Language Server](https://github.com/redhat-developer/yaml-language-server)
+  (pre-installed)
+
+## New plugins
+
+- None
+
+## Removed plugins
+
+- None
+
+## New key mappings
+
+- `<leader>fm` in Visual Mode - formats Visual selections through LSP, provided
+  the language server supports range formatting
+
+---
+
+# nvim-sq 1.12 - 8 December 2025
+
+## Changes
+
+- [basedpyright](https://github.com/DetachHead/basedpyright) now replaces
+  [pyright](https://github.com/microsoft/pyright) as the default Python LSP
+- Updated CMake Lua snippets
+- Restore last cursor position and centre the screen when reopening a file
+- Background transparency toggle now shows its current status
+- Canadian English spelling by default
+
+## New plugins
+
+- [nvim-colorizer](https://github.com/catgoose/nvim-colorizer.lua) (fork),
+  replaces the original plugin (see below)
+
+## Removed plugins
+
+- [nvim-colorizer](https://github.com/norcalli/nvim-colorizer.lua), no
+  longer actively maintained
+
+## New key mappings
+
+- None
+
+---
+
 # nvim-sq 1.11 - 24 September 2025
 
 ## Changes
 
-- `julials` has switched to the Neovim 0.11 LSP config style, eliminating
-  obsolete warnings
+- `julials` uses now the new Neovim 0.11 LSP config style, eliminating obsolete
+  warnings
 
 ## New plugins
 
@@ -16,6 +94,8 @@
 ## New key mappings
 
 - None
+
+---
 
 # nvim-sq 1.10 - 3 September 2025
 
@@ -43,6 +123,8 @@
 
 - None
 
+---
+
 # nvim-sq 1.9 - 4 August 2025
 
 ## Changes
@@ -62,6 +144,8 @@
 
 - `<leader>tc` - `:TSContext toggle` (`nvim-treesitter-context`), toggle
   Tree-sitter code context, ON by default
+
+---
 
 # nvim-sq 1.8 - 24 June 2025
 
@@ -93,8 +177,10 @@
   ```
 
   Replace `markdown.lua`
-  with the appropriate file type for which you want to disable auto-formatting on
-  save.
+  with the appropriate file type for which you want to disable auto-formatting
+  on save.
+
+---
 
 # nvim-sq 1.7 - 14 June 2025
 
@@ -119,6 +205,8 @@
 - `<leader>dl4` - LSP diagnostics, level 4
 - `<leader>dlt` - LSP diagnostics, toggle ON/OFF the current diagnostic level
 
+---
+
 # nvim-sq 1.6 - 3 June 2025
 
 ## Changes
@@ -134,6 +222,8 @@
 ## New key mappings
 
 - None
+
+---
 
 # nvim-sq 1.5 - 9 May 2025
 
@@ -152,6 +242,8 @@
 
 - None
 
+---
+
 # nvim-sq 1.4 - 21 April 2025
 
 ## Changes
@@ -168,12 +260,16 @@
   LSP-related key mappings starting with nvim 0.11. This functionality is now
   implemented by default starting with nvim 0.11 by the `grr` key mapping.
 
+---
+
 # nvim-sq 1.3 - 10 April 2025
 
 ## Changes
 
 - Zig buffers can now be executed with `<leader>cx`
 - Removed deprecated Neovim API
+
+---
 
 # nvim-sq 1.2 - 20 February 2025
 
@@ -183,6 +279,8 @@
   framework
 
 # nvim-sq 1.1 - 6 February 2025
+
+---
 
 ## Changes
 
@@ -205,6 +303,8 @@
 - `[Q` for `:cfirst`
 - `]Q` for `:clast`
 - `<leader>br` to toggle transparent background, non-transparent by default
+
+---
 
 # nvim-sq 1.0 - 20 January 2025
 
