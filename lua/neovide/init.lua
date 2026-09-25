@@ -51,7 +51,11 @@ if vim.g.neovide then
    -- U+2321, U+23AE) and U+1D715 that utftex emits when rendering math, and
    -- Neovide draws tofu instead of falling back the way a terminal does.
    -- Noto Sans Mono covers the box/integral pieces, DejaVu Math TeX Gyre the 𝜕.
-   vim.o.guifont = "JetBrainsMono Nerd Font,Noto Sans Mono,DejaVu Math TeX Gyre:h13"
+   -- The same math font is registered as "TeX Gyre DejaVu Math" on macOS but
+   -- as "DejaVu Math TeX Gyre" by fontconfig on Linux.
+   local math_font = vim.fn.has("mac") == 1 and "TeX Gyre DejaVu Math"
+      or "DejaVu Math TeX Gyre"
+   vim.o.guifont = "JetBrainsMono Nerd Font,Noto Sans Mono," .. math_font .. ":h13"
    -- Per-machine display scaling: macmini (macOS) vs Ubuntu laptop
    vim.g.neovide_scale_factor = vim.fn.has("mac") == 1 and 1.5 or 0.5
 end
