@@ -16,6 +16,32 @@ M.generic = {
          { desc = "Search last yanked text in browser" },
       },
 
+      -- gx, but repo-root paths (/workflows/x.svg) resolve too, and SVGs open in Inkscape
+      ["gx"] = {
+         function()
+            local cfile = vim.fn.expand("<cfile>")
+            local candidates = { cfile, vim.fs.joinpath(vim.fn.expand("%:p:h"), cfile) }
+            local root = vim.fs.root(0, ".git")
+            if root then
+               table.insert(candidates, vim.fs.joinpath(root, (cfile:gsub("^/", ""))))
+            end
+            local path
+            for _, c in ipairs(candidates) do
+               if vim.uv.fs_stat(c) then
+                  path = vim.fs.normalize(c)
+                  break
+               end
+            end
+            if path and path:match("%.svg$") then
+               local cmd = vim.fn.has("mac") == 1 and { "open", "-a", "Inkscape", path } or { "inkscape", path }
+               vim.system(cmd, { detach = true })
+            else
+               vim.ui.open(path or cfile)
+            end
+         end,
+         { desc = "Open file or URL under cursor (SVGs in Inkscape)" },
+      },
+
       ["<leader>|"] = {
          "<cmd> vsplit <CR>",
          { desc = "Split vertically [|]" },
