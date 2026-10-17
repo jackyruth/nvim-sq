@@ -16,7 +16,8 @@ M.generic = {
          { desc = "Search last yanked text in browser" },
       },
 
-      -- gx, but repo-root paths (/workflows/x.svg) resolve too, and SVGs open in Inkscape
+      -- gx, but repo-root paths (/workflows/x.svg) resolve too, SVGs open in Inkscape,
+      -- and notebooks open in Jupyter Notebook
       ["gx"] = {
          function()
             local cfile = vim.fn.expand("<cfile>")
@@ -32,14 +33,9 @@ M.generic = {
                   break
                end
             end
-            if path and path:match("%.svg$") then
-               local cmd = vim.fn.has("mac") == 1 and { "open", "-a", "Inkscape", path } or { "inkscape", path }
-               vim.system(cmd, { detach = true })
-            else
-               vim.ui.open(path or cfile)
-            end
+            require("core.util").open_external(path or cfile)
          end,
-         { desc = "Open file or URL under cursor (SVGs in Inkscape)" },
+         { desc = "Open file or URL under cursor (SVGs in Inkscape, notebooks in Jupyter)" },
       },
 
       ["<leader>|"] = {

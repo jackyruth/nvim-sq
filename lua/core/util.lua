@@ -18,6 +18,19 @@ function M.merge_tables(table1, table2)
    return merged_table
 end
 
+-- Open a file or URL outside Neovim: SVGs in Inkscape, notebooks in Jupyter
+-- Notebook, everything else with vim.ui.open
+function M.open_external(path)
+   if path:match("%.svg$") then
+      local cmd = vim.fn.has("mac") == 1 and { "open", "-a", "Inkscape", path } or { "inkscape", path }
+      vim.system(cmd, { detach = true })
+   elseif path:match("%.ipynb$") then
+      vim.system({ "jupyter", "notebook", path }, { detach = true })
+   else
+      vim.ui.open(path)
+   end
+end
+
 -- Utility function for M.map_keys()
 local function map_keys_inner(mode, rhs, additional_options)
    for key, cmd in pairs(rhs) do
